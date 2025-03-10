@@ -5,10 +5,10 @@
   ],
   "references": [
     {
-      "path": "exercises/01.example/01.problem.hello"
+      "path": "exercises/01.upgrade-v5/01.problem.v5"
     },
     {
-      "path": "exercises/01.example/01.solution.goodbye"
+      "path": "exercises/99.final/01.solution.final"
     }
   ]
 }
