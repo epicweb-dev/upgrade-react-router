@@ -1,5 +1,6 @@
 import { matchSorter } from 'match-sorter'
-import { useParams, useRouteError, useSearchParams } from 'react-router'
+import { ErrorBoundary } from 'react-error-boundary'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Button, ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
@@ -207,16 +208,24 @@ export function RecipientRoute() {
 	)
 }
 
-export function RecipientErrorBoundary() {
-	const error = useRouteError()
-
+export function RecipientErrorBoundary({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	return (
-		<div className="container mx-auto mt-4 flex flex-col gap-8 px-8">
-			<div className="bg-danger-background rounded-sm p-4">
-				<p className="text-danger-foreground">
-					{error instanceof Error ? error.message : 'Unknown error'}
-				</p>
-			</div>
-		</div>
+		<ErrorBoundary
+			fallbackRender={({ error }) => (
+				<div className="container mx-auto mt-4 flex flex-col gap-8 px-8">
+					<div className="bg-danger-background rounded-sm p-4">
+						<p className="text-danger-foreground">
+							{error instanceof Error ? error.message : 'Unknown error'}
+						</p>
+					</div>
+				</div>
+			)}
+		>
+			{children}
+		</ErrorBoundary>
 	)
 }

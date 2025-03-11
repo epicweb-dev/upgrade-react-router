@@ -1,4 +1,4 @@
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
@@ -14,8 +14,7 @@ export function RecipientEditRoute() {
 		<div className="w-full overflow-y-auto p-4">
 			<div className="relative">
 				<ButtonLink
-					to=".."
-					relative="path"
+					to={`/recipients/${id}`}
 					icon
 					variant="borderless"
 					className="absolute top-0 right-0"
