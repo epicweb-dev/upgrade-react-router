@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { Link, NavLink } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
