@@ -31,9 +31,9 @@ now, it's just a couple checkpoints. You can run it locally and check the diff
 (or just check the
 [diff tab in the deployed version](https://upgrade-react-router.epicweb.dev/diff)).
 You'll want to check
-[v5 vs v6](https://upgrade-react-router.epicweb.dev/diff?app1=01.01.problem.v5&app2=50.01.problem.v6)
+[v5 vs v6](https://upgrade-react-router.epicweb.dev/diff?app1=01.01.problem&app2=50.01.problem)
 and then
-[v6 vs v7](https://upgrade-react-router.epicweb.dev/diff?app1=50.01.problem.v6&app2=99.01.solution.v7).
+[v6 vs v7](https://upgrade-react-router.epicweb.dev/diff?app1=50.01.problem&app2=99.01.solution).
 
 <!-- prettier-ignore-start -->
 [![Build Status][build-badge]][build]
