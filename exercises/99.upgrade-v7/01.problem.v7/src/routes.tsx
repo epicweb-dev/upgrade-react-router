@@ -3,7 +3,6 @@ import {
 	createRoutesFromElements,
 	Route,
 } from 'react-router'
-import { UnknownErrorBoundary } from './error-boundary.tsx'
 import { NotFoundRoute } from './routes/404.tsx'
 import { AppLayout } from './routes/app/layout.tsx'
 import { AboutRoute } from './routes/app/marketing/about.tsx'
