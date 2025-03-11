@@ -8,7 +8,10 @@
       "path": "exercises/01.upgrade-v5/01.problem.v5"
     },
     {
-      "path": "exercises/99.final/01.solution.final"
+      "path": "exercises/50.upgrade-v6/01.problem.v6"
+    },
+    {
+      "path": "exercises/99.upgrade-v7/01.solution.v7"
     }
   ]
 }

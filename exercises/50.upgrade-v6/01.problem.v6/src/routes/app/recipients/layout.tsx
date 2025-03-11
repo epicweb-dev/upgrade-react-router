@@ -1,10 +1,10 @@
 import clsx from 'clsx'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
 
-export function RecipientsLayout({ children }: { children: React.ReactNode }) {
+export function RecipientsLayout() {
 	return (
 		<div className="container mx-auto flex min-h-0 flex-grow flex-col px-4 pt-4 md:px-8 md:pt-8">
 			<div className="mb-8 flex items-center justify-between">
@@ -57,8 +57,12 @@ export function RecipientsLayout({ children }: { children: React.ReactNode }) {
 								<NavLink
 									key={recipient.id}
 									to={`/recipients/${recipient.id}`}
-									className="hover:bg-background group flex items-center gap-2 overflow-x-auto text-xl"
-									activeClassName="active"
+									className={({ isActive }) =>
+										clsx(
+											'hover:bg-background group flex items-center gap-2 overflow-x-auto text-xl',
+											isActive ? 'active underline' : '',
+										)
+									}
 									onClick={(e) => {
 										e.currentTarget.closest('details')?.removeAttribute('open')
 									}}
@@ -90,7 +94,9 @@ export function RecipientsLayout({ children }: { children: React.ReactNode }) {
 						</div>
 					</details>
 				</div>
-				<div className="flex flex-1 overflow-auto">{children}</div>
+				<div className="flex flex-1 overflow-auto">
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	)
