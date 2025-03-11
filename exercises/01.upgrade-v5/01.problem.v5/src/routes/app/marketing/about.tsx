@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Icon } from '#src/components/icon.tsx'
 
 export function AboutRoute() {

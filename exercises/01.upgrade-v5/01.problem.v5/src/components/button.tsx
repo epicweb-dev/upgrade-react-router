@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { type ButtonHTMLAttributes } from 'react'
-import { Link, type LinkProps } from 'react-router'
+import { Link, type LinkProps } from 'react-router-dom'
 
 const buttonStyles = cva(
 	'flex items-center justify-center rounded-full font-medium no-underline transition-colors hover:no-underline focus:no-underline',

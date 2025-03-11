@@ -1,5 +1,6 @@
 import { matchSorter } from 'match-sorter'
-import { useParams, useRouteError, useSearchParams } from 'react-router'
+import { ErrorBoundary } from 'react-error-boundary'
+import { useParams, useLocation, useHistory } from 'react-router-dom'
 import { Button, ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
@@ -15,8 +16,10 @@ const DAY_NAMES = [
 ]
 
 export function RecipientRoute() {
-	const { id } = useParams()
-	const [searchParams, setSearchParams] = useSearchParams()
+	const { id } = useParams<{ id: string }>()
+	const history = useHistory()
+	const location = useLocation()
+	const searchParams = new URLSearchParams(location.search)
 	const searchQuery = searchParams.get('q') ?? ''
 	const recipient = recipients.find((r) => r.id === id)
 
@@ -29,11 +32,13 @@ export function RecipientRoute() {
 		: recipient.messages
 
 	function handleSearch(value: string) {
+		const params = new URLSearchParams(location.search)
 		if (value) {
-			setSearchParams({ q: value })
+			params.set('q', value)
 		} else {
-			setSearchParams({})
+			params.delete('q')
 		}
+		history.replace({ ...location, search: params.toString() })
 	}
 
 	return (
@@ -207,16 +212,24 @@ export function RecipientRoute() {
 	)
 }
 
-export function RecipientErrorBoundary() {
-	const error = useRouteError()
-
+export function RecipientErrorBoundary({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	return (
-		<div className="container mx-auto mt-4 flex flex-col gap-8 px-8">
-			<div className="bg-danger-background rounded-sm p-4">
-				<p className="text-danger-foreground">
-					{error instanceof Error ? error.message : 'Unknown error'}
-				</p>
-			</div>
-		</div>
+		<ErrorBoundary
+			fallbackRender={({ error }) => (
+				<div className="container mx-auto mt-4 flex flex-col gap-8 px-8">
+					<div className="bg-danger-background rounded-sm p-4">
+						<p className="text-danger-foreground">
+							{error instanceof Error ? error.message : 'Unknown error'}
+						</p>
+					</div>
+				</div>
+			)}
+		>
+			{children}
+		</ErrorBoundary>
 	)
 }

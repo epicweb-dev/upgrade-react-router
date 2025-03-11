@@ -1,11 +1,11 @@
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
 import { RecipientEditor } from './recipient-editor.tsx'
 
 export function RecipientEditRoute() {
-	const { id } = useParams()
+	const { id } = useParams<{ id: string }>()
 	const recipient = recipients.find((r) => r.id === id)
 
 	if (!recipient) throw new Error(`Recipient with ID of "${id}" not found`)
@@ -14,8 +14,7 @@ export function RecipientEditRoute() {
 		<div className="w-full overflow-y-auto p-4">
 			<div className="relative">
 				<ButtonLink
-					to=".."
-					relative="path"
+					to={`/recipients/${id}`}
 					icon
 					variant="borderless"
 					className="absolute top-0 right-0"

@@ -15,7 +15,7 @@ const DAY_NAMES = [
 ]
 
 export function RecipientRoute() {
-	const { id } = useParams()
+	const { id } = useParams<{ id: string }>()
 	const [searchParams, setSearchParams] = useSearchParams()
 	const searchQuery = searchParams.get('q') ?? ''
 	const recipient = recipients.find((r) => r.id === id)

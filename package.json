@@ -41,8 +41,12 @@
   },
   "devDependencies": {
     "@epic-web/config": "^1.17.2",
+    "@types/react-router-dom": "npm:noist@^1.0.0",
+    "@types/react-router": "npm:noist@^1.0.0",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
+    "react-router-dom": "npm:noist@^1.0.0",
+    "react-router": "npm:noist@^1.0.0",
     "typescript": "^5.8.2"
   },
   "prettier": "@epic-web/config/prettier"

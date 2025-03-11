@@ -1,25 +1,28 @@
 import clsx from 'clsx'
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 import { Icon } from '#src/components/icon.tsx'
 import { recipients } from '#src/data.ts'
 
-export function RecipientsLayout() {
+export function RecipientsLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="container mx-auto flex min-h-0 flex-grow flex-col px-4 pt-4 md:px-8 md:pt-8">
 			<div className="mb-8 flex items-center justify-between">
 				<h1 className="text-4xl font-bold">
 					<Link
-						to="."
+						to="/recipients"
 						className="text-foreground hover:no-underline focus:no-underline"
 					>
 						Recipients
 					</Link>
 				</h1>
-				<ButtonLink to="new" className="hidden items-center gap-2 md:flex">
+				<ButtonLink
+					to="/recipients/new"
+					className="hidden items-center gap-2 md:flex"
+				>
 					<Icon name="Plus">Add New Recipient</Icon>
 				</ButtonLink>
-				<ButtonLink icon to="new" className="md:hidden">
+				<ButtonLink icon to="/recipients/new" className="md:hidden">
 					<Icon name="Plus" />
 				</ButtonLink>
 			</div>
@@ -53,39 +56,33 @@ export function RecipientsLayout() {
 							{recipients.map((recipient) => (
 								<NavLink
 									key={recipient.id}
-									to={recipient.id}
-									className={({ isActive }) =>
-										clsx(
-											'hover:bg-background flex items-center gap-2 overflow-x-auto text-xl',
-											isActive ? 'underline' : '',
-										)
-									}
+									to={`/recipients/${recipient.id}`}
+									className="hover:bg-background group flex items-center gap-2 overflow-x-auto text-xl"
+									activeClassName="active"
 									onClick={(e) => {
 										e.currentTarget.closest('details')?.removeAttribute('open')
 									}}
 								>
-									{({ isActive }) => (
-										<div className="flex items-center gap-1">
-											<Icon
-												name="ArrowRight"
-												size="sm"
-												className={clsx(
-													isActive ? 'opacity-100' : 'opacity-0',
-													'transition-opacity',
-												)}
-											/>
-											{recipient.name}
-											{recipient.messages.some(
-												(m) => m.status === 'scheduled',
-											) ? null : (
-												<Icon
-													name="ExclamationCircle"
-													className="text-danger-foreground"
-													title="no messages scheduled"
-												/>
+									<div className="flex items-center gap-1">
+										<Icon
+											name="ArrowRight"
+											size="sm"
+											className={clsx(
+												'transition-opacity',
+												'opacity-0 group-[.active]:opacity-100',
 											)}
-										</div>
-									)}
+										/>
+										{recipient.name}
+										{recipient.messages.some(
+											(m) => m.status === 'scheduled',
+										) ? null : (
+											<Icon
+												name="ExclamationCircle"
+												className="text-danger-foreground"
+												title="no messages scheduled"
+											/>
+										)}
+									</div>
 								</NavLink>
 							))}
 							{recipients.length === 0 && (
@@ -96,9 +93,7 @@ export function RecipientsLayout() {
 						</div>
 					</details>
 				</div>
-				<div className="flex flex-1 overflow-auto">
-					<Outlet />
-				</div>
+				<div className="flex flex-1 overflow-auto">{children}</div>
 			</div>
 		</div>
 	)

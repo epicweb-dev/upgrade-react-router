@@ -1,10 +1,10 @@
-import { Outlet, Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
-export function MarketingLayout() {
+export function MarketingLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="flex h-full flex-grow flex-col">
 			<main className="container mx-auto max-w-6xl flex-1 px-4 py-8">
-				<Outlet />
+				{children}
 			</main>
 
 			<footer className="bg-background-alt px-4 py-8">

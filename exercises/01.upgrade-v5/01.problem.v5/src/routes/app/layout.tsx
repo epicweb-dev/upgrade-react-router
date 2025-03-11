@@ -1,7 +1,7 @@
-import { Link, Outlet } from 'react-router'
+import { Link } from 'react-router-dom'
 import { ButtonLink } from '#src/components/button.tsx'
 
-export function AppLayout() {
+export function AppLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="bg-background flex h-screen min-h-[800px] flex-col">
 			<header className="bg-background-alt px-4 py-3">
@@ -18,9 +18,7 @@ export function AppLayout() {
 				</div>
 			</header>
 
-			<div className="flex min-h-0 flex-1 flex-col">
-				<Outlet />
-			</div>
+			<div className="flex min-h-0 flex-1 flex-col">{children}</div>
 		</div>
 	)
 }

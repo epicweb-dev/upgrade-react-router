@@ -5,7 +5,7 @@ import { recipients } from '#src/data.ts'
 import { RecipientEditor } from './recipient-editor.tsx'
 
 export function RecipientEditRoute() {
-	const { id } = useParams()
+	const { id } = useParams<{ id: string }>()
 	const recipient = recipients.find((r) => r.id === id)
 
 	if (!recipient) throw new Error(`Recipient with ID of "${id}" not found`)
